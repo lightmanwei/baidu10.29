@@ -28,7 +28,7 @@ void MainWindow::on_push_listen_clicked()
         int port = ui->line_port->text().toInt();
         if(!server->listen(QHostAddress::Any, port))
         {
-            qDebug()<<server->errorString();
+            qDebug()<<server->errorString();//显示错误原因，用人类能读懂的方式（蹩脚翻译）
             return;
         }
         ui->push_listen->setText("stop listen");
@@ -88,9 +88,9 @@ void MainWindow::on_push_save_clicked()
 
 
     {
-         QFile file("/Users/gikosei/qtstudy/baidu/socket/save.txt");
+         QFile file("/Users/gikosei/qtstudy/baidu/socket/save.txt");//路径
 
-         if(!file.open(QIODevice::WriteOnly|QIODevice::Text))
+         if(!file.open(QIODevice::WriteOnly|QIODevice::Text))//如果文件没打开
          {
           QMessageBox::critical(NULL,"attention!","error");
           qDebug()<<"!!!no";

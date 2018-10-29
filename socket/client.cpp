@@ -32,21 +32,21 @@ void client::on_push_connect_clicked()
         QString IP;
        int port;
        IP=ui->line_ip->text();
-       port=ui->line_port->text().toInt();
-        socket->abort();
+       port=ui->line_port->text().toInt();//获取IP和port
+        socket->abort();//断掉之前的链接
         socket->connectToHost(IP, port);
-        if(!socket->waitForConnected(30000))
+        if(!socket->waitForConnected(30000))//超时否
         {
             qDebug()<<"failed";
             return;
         }
-        qDebug()<<"succedd";
+        qDebug()<<"succeed";
         ui->push_send->setEnabled(true);
         ui->push_connect->setText("disconnect");
     }
     else
         {
-            socket->disconnectFromHost();
+            socket->disconnectFromHost();//如果现在的文字不是“connect”，按下按钮就是断开连接
             ui->push_connect->setText("connect");
             ui->push_send->setEnabled(false);
         }
@@ -63,7 +63,7 @@ void client::on_push_send_clicked()
 void client::read_data()
 {
     QByteArray buffer;
-    buffer=socket->readAll();
+    buffer=socket->readAll();//读到缓冲区
     if(!buffer.isEmpty())
     {
         QString str=ui->text_receive->toPlainText();
